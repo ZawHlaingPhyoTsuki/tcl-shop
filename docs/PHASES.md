@@ -1,25 +1,21 @@
 # Phase log
 
-Running record of the tcl-shop (v2) build. Each entry lists what shipped and
+Running record of the tcl-shop build. Each entry lists what shipped and
 the migration it created (if any).
-
-The v1 directory product lives on the `v1/tcl-guide` branch; its phase log is
-not carried over.
 
 Standing rule: migration history is append-only from the first deploy on. Never
 squash after deploying.
 
 ## Migration history
 
-v2 started a fresh baseline on 2026-10-31: `20261031000000_init`. It replaces
-the v1 history (`20261007073603_init`) and creates the shop, catalog, and order
-tables. Dev databases must be reset before applying it.
+The schema baseline started on 2026-10-31: `20261031000000_init`, which creates
+the shop, catalog, and order tables. Dev databases must be reset before applying
+it.
 
 ## Phase 1 — Schema (done)
 
 `Shop`, `Product`, `ProductVariant`, `Category`, `Order`, `OrderItem`; product
-publication states, integer money with `Currency`, order-item snapshots. v1
-`Place`/`Area` models and modules removed.
+publication states, integer money with `Currency`, order-item snapshots.
 
 ## Phase 2 — Auth and merchant roles (pending)
 

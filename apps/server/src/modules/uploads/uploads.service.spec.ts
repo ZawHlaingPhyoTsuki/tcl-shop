@@ -9,7 +9,7 @@ vi.mock("../../env.server.js", () => ({
     AWS_REGION: "ap-southeast-1",
     AWS_ACCESS_KEY_ID: "test-access-key",
     AWS_SECRET_ACCESS_KEY: "test-secret-key",
-    NEON_BUCKET_NAME: "tcl-guide-images",
+    NEON_BUCKET_NAME: "tcl-shop-images",
   },
 }));
 
@@ -26,7 +26,7 @@ function spySend(service: UploadsService) {
 }
 
 const MANAGED_URL =
-  "https://storage.example.test/tcl-guide-images/places/b114d0df-47a9-459f-a52b-78b2dafd0ea5.png";
+  "https://storage.example.test/tcl-shop-images/places/b114d0df-47a9-459f-a52b-78b2dafd0ea5.png";
 
 describe("UploadsService", () => {
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe("UploadsService", () => {
     ];
     expect(command).toBeInstanceOf(PutObjectCommand);
     expect(command.input).toMatchObject({
-      Bucket: "tcl-guide-images",
+      Bucket: "tcl-shop-images",
       ContentType: "image/png",
     });
     expect(command.input.Key).toMatch(/^places\/[0-9a-f-]{36}\.png$/);
@@ -67,7 +67,7 @@ describe("UploadsService", () => {
 
     expect(result.uploadUrl).toBe("https://signed.example.test/upload");
     expect(result.url).toMatch(
-      /^https:\/\/storage\.example\.test\/tcl-guide-images\/places\/[0-9a-f-]{36}\.webp$/,
+      /^https:\/\/storage\.example\.test\/tcl-shop-images\/places\/[0-9a-f-]{36}\.webp$/,
     );
   });
 
@@ -82,7 +82,7 @@ describe("UploadsService", () => {
     const command = send.mock.calls[0][0] as DeleteObjectCommand;
     expect(command).toBeInstanceOf(DeleteObjectCommand);
     expect(command.input).toEqual({
-      Bucket: "tcl-guide-images",
+      Bucket: "tcl-shop-images",
       Key: "places/b114d0df-47a9-459f-a52b-78b2dafd0ea5.png",
     });
   });
@@ -102,7 +102,7 @@ describe("UploadsService", () => {
     const send = spySend(service);
 
     await expect(
-      service.deleteUpload({ url: "https://storage.example.test/tcl-guide-images/other/file.png" }),
+      service.deleteUpload({ url: "https://storage.example.test/tcl-shop-images/other/file.png" }),
     ).rejects.toThrow("URL is not a managed upload");
     expect(send).not.toHaveBeenCalled();
   });

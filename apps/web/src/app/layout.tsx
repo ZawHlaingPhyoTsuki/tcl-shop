@@ -16,8 +16,8 @@ const outfitHeading = localFont({
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "tcl-guide",
-  description: "tcl-guide",
+  title: "tcl-shop",
+  description: "tcl-shop",
 };
 
 export default async function RootLayout({

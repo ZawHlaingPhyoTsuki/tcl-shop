@@ -2,10 +2,12 @@
 
 ## Open questions
 
-- How far do variants go in v1: size/color only, or arbitrary option pairs?
+- How far do variants go in the first release: size/color only, or arbitrary
+  option pairs?
 - Can a guest look up an order by reference + phone, or is the confirmation link
   the only access?
-- Do merchant accounts start as self-serve signup or admin-created in v1?
+- Do merchant accounts start as self-serve signup or admin-created in the
+  first release?
 - Is a product limited to one category, or several?
 - Do we need a separate shop location model now, or free-text delivery info?
 - Shan language fields are deferred; the schema stores English and Myanmar
@@ -13,7 +15,7 @@
 
 ## Next up
 
-- [x] Define the v2 Prisma schema: Shop, Product, Variant, Category, Order,
+- [x] Define the Prisma schema: Shop, Product, Variant, Category, Order,
       OrderItem (single shop owner for now).
 - [x] Decide order and payment status vocabularies (PENDING/CONFIRMED/
       DELIVERED/CANCELLED; UNPAID/PAID).
@@ -67,6 +69,6 @@
 
 ## Codebase
 
-- [x] Retire v1 server modules (places, areas).
-- [ ] Retire v1 web pages and dashboard screens.
+- [x] Retire legacy directory server modules (places, areas).
+- [ ] Retire legacy directory web pages and dashboard screens.
 - [x] Update seeds and fixtures to the shop model.

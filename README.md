@@ -1,4 +1,4 @@
-# tcl-guide (tcl-shop)
+# tcl-shop
 
 tcl-shop is a mobile-first product discovery and storefront platform for social-commerce merchants in Tachileik, Myanmar. Customers browse products across shops and place cash-on-delivery (COD) orders; merchants manage their own shop, listings, inventory, and orders. Monorepo with a Next.js frontend and a NestJS (modular monolith) API.
 
@@ -116,7 +116,7 @@ For more details, see the guide on [Deploying with Docker Compose](https://www.b
 ## Project Structure
 
 ```
-tcl-guide/
+tcl-shop/
 ├── apps/
 │   ├── web/         # Frontend application (Next.js, owns its shadcn/ui setup)
 │   └── server/      # Backend API (NestJS, modular monolith; owns auth + Prisma)

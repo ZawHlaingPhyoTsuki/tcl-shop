@@ -80,7 +80,7 @@ This block is written and re-added by `turbo` before repository-scoped commands 
 
 ### Issue tracker
 
-Issues live in GitHub Issues (`ZawHlaingPhyoTsuki/tcl-guide`), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+Issues live in GitHub Issues (`ZawHlaingPhyoTsuki/tcl-shop`), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

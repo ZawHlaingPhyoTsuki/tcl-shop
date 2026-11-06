@@ -9,7 +9,7 @@ import { serverUrl } from "@/lib/server-url";
  * the Better Auth instance and the database.
  *
  * Why not call the API directly from the browser? Web
- * (`tcl-guide.vercel.app`) and API (`*.azurewebsites.net`) are different
+ * (`tcl-shop.vercel.app`) and API (`*.azurewebsites.net`) are different
  * sites: a `Set-Cookie` from the API is third-party and gets dropped, and
  * the cookie would never be visible to middleware / Server Components.
  */

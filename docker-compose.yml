@@ -1,4 +1,4 @@
-name: tcl-guide
+name: tcl-shop
 
 services:
   web:
@@ -49,7 +49,7 @@ services:
       - path: apps/server/.env
         required: false
     environment:
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-password}@postgres:5432/tcl-guide
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-password}@postgres:5432/tcl-shop
     healthcheck:
       test:
         [
@@ -69,15 +69,15 @@ services:
 
   postgres:
     image: postgres:18
-    container_name: tcl-guide-postgres
+    container_name: tcl-shop-postgres
     environment:
-      POSTGRES_DB: tcl-guide
+      POSTGRES_DB: tcl-shop
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
     ports:
       - "5432:5432"
     volumes:
-      - tcl-guide_postgres_data:/var/lib/postgresql
+      - tcl-shop_postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -86,7 +86,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  tcl-guide_postgres_data:
+  tcl-shop_postgres_data:
 
 # BuildKit makes these available only while install/build commands run.
 secrets:

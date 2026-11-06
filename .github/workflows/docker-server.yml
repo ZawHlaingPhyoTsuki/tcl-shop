@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  IMAGE: zawhlaingphyo/tcl-guide-server
+  IMAGE: zawhlaingphyo/tcl-shop-server
 
 jobs:
   push:
