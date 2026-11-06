@@ -1,0 +1,19 @@
+model UserAddress {
+    id        String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    
+    label     String   // "Home", "Work", "Parent's House", etc.
+    address   String   // Full address text
+    phone     String   // Contact phone for this address
+    city      String?  // Optional: township name (e.g., "Tachileik Township")
+    district  String?  // Optional: ward/quarter (e.g., "Ward 3")
+    
+    isDefault Boolean  @default(false)
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    
+    @@index([userId])
+    @@map("user_address")
+}

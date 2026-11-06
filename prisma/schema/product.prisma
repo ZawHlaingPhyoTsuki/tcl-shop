@@ -1,0 +1,63 @@
+enum ProductStatus {
+    DRAFT
+    PUBLISHED
+    ARCHIVED
+}
+
+model Product {
+    id String @id @default(cuid())
+
+    slug          String
+    nameMy        String
+    nameEn        String?
+    descriptionMy String?
+    descriptionEn String?
+    // Dual-currency support: MMK and THB. At least one must be set.
+    priceMmk      Int?
+    priceThb      Int?
+    // Ignored when variants exist; variants then own stock.
+    stock         Int           @default(0)
+    images        String[]      @default([])
+    status        ProductStatus @default(DRAFT)
+    createdAt     DateTime      @default(now())
+    updatedAt     DateTime      @updatedAt
+
+    categoryId String
+    category   Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+    shopId String
+    shop   Shop   @relation(fields: [shopId], references: [id], onDelete: Cascade)
+
+    variants   ProductVariant[]
+    orderItems OrderItem[]
+
+    @@unique([shopId, slug])
+    @@index([categoryId])
+    @@index([slug])
+    @@index([status, createdAt])
+    @@index([status, priceMmk])
+    @@index([status, priceThb])
+    @@map("product")
+}
+
+model ProductVariant {
+    id String @id @default(cuid())
+
+    label     String
+    // Null falls back to Product.priceMmk / Product.priceThb.
+    priceMmk  Int?
+    priceThb  Int?
+    stock     Int      @default(0)
+    sortOrder Int      @default(0)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    productId String
+    product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+    orderItems OrderItem[]
+
+    @@unique([productId, label])
+    @@index([productId])
+    @@map("product_variant")
+}
