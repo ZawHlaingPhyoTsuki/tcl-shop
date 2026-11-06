@@ -1,0 +1,39 @@
+enum Currency {
+  MMK
+  THB
+}
+
+enum ShopStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+model Shop {
+  id            String     @id @default(cuid())
+  slug          String     @unique
+  nameMy        String
+  nameEn        String?
+  descriptionMy String?
+  descriptionEn String?
+  phone         String?
+  addressText   String?
+  latitude      Float?
+  longitude     Float?
+  logoUrl       String?
+  coverUrl      String?
+  deliveryNote  String?
+  deliveryFee   Int        @default(0)
+  currency      Currency   @default(MMK)
+  // Plain string ownership is avoided: User lives in hand-maintained auth.prisma.
+  ownerId       String     @unique
+  owner         User       @relation("ShopOwner", fields: [ownerId], references: [id], onDelete: Restrict)
+  status        ShopStatus @default(ACTIVE)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  products Product[]
+  orders   Order[]
+
+  @@index([status])
+  @@map("shop")
+}

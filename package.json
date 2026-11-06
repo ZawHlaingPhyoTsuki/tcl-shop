@@ -1,0 +1,66 @@
+{
+  "name": "tcl-guide",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev -F web --",
+    "dev:server": "turbo run dev -F server --",
+    "build": "turbo run build",
+    "build:web": "turbo run build -F web --",
+    "build:server": "turbo run build -F server --",
+    "start": "turbo run start",
+    "start:web": "turbo run start -F web -- --port 3001",
+    "start:server": "turbo run start -F server --",
+    "check-types": "turbo run check-types",
+    "test": "turbo run test",
+    "db:push": "turbo run db:push -F server --",
+    "db:studio": "turbo run db:studio -F server --",
+    "db:generate": "turbo run db:generate -F server --",
+    "db:migrate": "turbo run db:migrate -F server --",
+    "db:seed": "turbo run db:seed -F server --",
+    "db:start": "docker compose up -d postgres",
+    "db:watch": "docker compose up postgres",
+    "db:stop": "docker compose stop postgres",
+    "db:down": "docker compose down postgres",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "env:generate": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/server/",
+    "postinstall": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/server/",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt --write",
+    "check": "pnpm lint:fix && pnpm format:fix && pnpm run check-types",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@neon/config": "^1.8.3",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.0",
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
+    "turbo": "^2.10.12",
+    "typescript": "catalog:",
+    "varlock": "catalog:"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "oxlint --fix",
+      "oxfmt --write"
+    ],
+    "*.{css,json,md}": [
+      "oxfmt --write"
+    ]
+  },
+  "packageManager": "pnpm@12.8.1"
+}
