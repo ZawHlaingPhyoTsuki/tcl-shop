@@ -1,91 +1,9 @@
-# tcl-shop — Agent Instructions
+<!-- BEGIN:nextjs-agent-rules -->
 
-## Project Overview
+## This is NOT the Next.js you know
 
-tcl-shop is a mobile-first product discovery and storefront platform for
-social-commerce merchants in Tachileik, Myanmar.
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-Customers browse products across shops and place cash-on-delivery (COD)
-orders. Merchants manage their own shop, listings, inventory, and orders.
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
-Three actors define the scope: **customer** (browse, search, order),
-**merchant** (shop, products, stock, orders), and **platform admin**
-(shops, moderation, categories). Public product and shop pages work without
-signing in.
-
-The project is also intended to be a serious backend-learning project,
-so backend architecture, API design, validation, authentication,
-database design, testing, and documentation are important.
-
-## WHAT NOT TO DO
-
-Don't run the server and the web build at the same time; run them separately, one at a time.
-
-## Tech Stack
-
-### Web
-
-- Next.js
-- TypeScript
-- React
-- shadcn/ui
-
-### API
-
-- NestJS
-- TypeScript
-- REST API
-- OpenAPI / Swagger
-
-### Database
-
-- PostgreSQL
-- Prisma
-
-### Authentication
-
-- Better Auth
-
-### Monorepo
-
-- pnpm workspaces
-- Turborepo
-
-## Architecture
-
-Use a modular monolith.
-
-```text
-Next.js Web (customer storefront + merchant/admin dashboard)
-    ↓ HTTP / REST
-NestJS API (owns auth integration, validation, business rules)
-    ↓
-Prisma
-    ↓
-PostgreSQL
-
-<!-- BEGIN:turborepo-agent-rules -->
-
-# This is NOT the Turborepo you know
-
-Turborepo configuration, task behavior, and CLI commands can vary between installed versions and may differ from your training data. Resolve the `turbo` package from this file's directory or relevant workspace; in monorepos, it may not be visible from the repository root. For example, run `node -p "require.resolve('turbo/package.json')"` from a workspace that depends on `turbo`.
-
-Read `docs/README.md` inside that installed package first, then read the relevant pages from its `docs/` directory before changing Turborepo configuration or commands. Heed deprecation notices. These bundled docs match the installed package version and are available without network access.
-
-This block is written and re-added by `turbo` before repository-scoped commands when an AI agent is detected. In the Turborepo source repository, its template is defined in `crates/turborepo-cli/src/cli/agent_guidance.rs`. Removing the managed block while updates are enabled means a later qualifying invocation will add it again. Set `"agentGuidance": false` in the root `turbo.json` or `turbo.jsonc` to opt out; this does not remove an existing block. Keep the block committed with your work to avoid an uncommitted change on the next agent invocation.
-<!-- END:turborepo-agent-rules -->
-```
-
-## Agent skills
-
-### Issue tracker
-
-Issues live in GitHub Issues (`ZawHlaingPhyoTsuki/tcl-shop`), via the `gh` CLI. See `docs/agents/issue-tracker.md`.
-
-### Triage labels
-
-Default five-role vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
-
-### Domain docs
-
-Single-context: `docs/GLOSSARY.md` + `docs/adr/`. See `docs/agents/domain.md`.
+<!-- END:nextjs-agent-rules -->

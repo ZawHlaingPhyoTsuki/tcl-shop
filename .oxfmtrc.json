@@ -1,9 +1,0 @@
-{
-  "ignorePatterns": [
-    ".agents/",
-    ".claude/",
-    "apps/*/.next/",
-    "apps/server/src/generated/",
-    "apps/*/src/env.ts"
-  ]
-}

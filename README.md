@@ -1,144 +1,36 @@
-# tcl-shop
-
-tcl-shop is a mobile-first product discovery and storefront platform for social-commerce merchants in Tachileik, Myanmar. Customers browse products across shops and place cash-on-delivery (COD) orders; merchants manage their own shop, listings, inventory, and orders. Monorepo with a Next.js frontend and a NestJS (modular monolith) API.
-
-## Product features
-
-- **Customer**: browse and search published products, filter by category, sort results, view product and shop pages, share links, and place a COD order as a guest.
-- **Merchant**: create a shop, manage products (publish, unpublish, archive), upload images, track stock and variants, review orders, and set delivery information.
-- **Platform admin**: review shops, moderate listings, manage categories, and suspend abusive accounts.
-
-Map and location features are secondary; the storefront is the product.
-
-## Stack and tooling
-
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - UI primitives live in `apps/web/src/components/ui`
-- **NestJS** - Progressive Node.js framework (Express adapter, modular monolith)
-- **Node.js** - Runtime environment
-- **Prisma** - TypeScript-first ORM
-- **PostgreSQL** - Database engine
-- **Authentication** - Better-Auth (via `@thallesp/nestjs-better-auth`)
-- **Husky** - Git hooks for code quality
-- **Oxlint** - Oxlint + Oxfmt (linting & formatting)
-- **Turborepo** - Optimized monorepo build system
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-First, install the dependencies:
+First, run the development server:
 
 ```bash
-pnpm install
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Database Setup
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Generate the Prisma client before development, typechecking, or building, including in CI and deployment builds. Run this again after changing the Prisma schema:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-pnpm run db:generate
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-This project uses PostgreSQL with Prisma.
+## Learn More
 
-1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/server/.env` file with your PostgreSQL connection details.
+To learn more about Next.js, take a look at the following resources:
 
-3. Apply the schema to your database:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```bash
-pnpm run db:push
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Then, run the development server:
+## Deploy on Vercel
 
-```bash
-pnpm run dev
-```
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
-The API is running at [http://localhost:3000](http://localhost:3000).
-
-## UI Customization
-
-The web app owns its shadcn/ui setup directly (no shared UI package).
-
-- Change design tokens and global styles in `apps/web/src/styles/globals.css`
-- Update primitives in `apps/web/src/components/ui/*`
-- Adjust shadcn aliases or style config in `apps/web/components.json`
-
-### Add more components
-
-Run this from `apps/web` to add more primitives:
-
-```bash
-pnpm dlx shadcn@latest add accordion dialog popover sheet table
-```
-
-Import components like this:
-
-```tsx
-import { Button } from "@/components/ui/button";
-```
-
-## Environment Configuration
-
-Each app owns its environment schema in `.env.schema` (`apps/web`, `apps/server`). Varlock generates `src/env.ts` during installation; run `pnpm run env:generate` after changing a schema. Commit schemas, and keep secrets in ignored env files or your deployment platform.
-
-Import the generated `ENV` accessor in application code (via `src/env.server.ts`, which loads Varlock with `varlock/auto-load`).
-
-The framework integration or server bootstrap loads Varlock. Node deployments must include Varlock and its dependencies alongside the app schema.
-
-Run standalone Node tools that use Varlock from the owning app directory so they load that app's schema and env files. `env:generate` only generates TypeScript files; it does not initialize environment values in a subsequent command.
-
-## Deployment
-
-### Docker Compose
-
-- Target: web + server
-- Config: `docker-compose.yml` (app Dockerfiles live in `apps/*/Dockerfile`)
-- Build images: pnpm run docker:build
-- Start: pnpm run docker:up
-- Logs: pnpm run docker:logs
-- Stop: pnpm run docker:down
-
-Environment variables are read from each app's `.env` file (baked into web builds for public variables) and overridden in `docker-compose.yml` for container networking.
-
-For more details, see the guide on [Deploying with Docker Compose](https://www.better-t-stack.dev/docs/guides/docker).
-
-## Git Hooks and Formatting
-
-- Initialize hooks: `pnpm run prepare`
-- Run checks: `pnpm run check`
-
-## Project Structure
-
-```
-tcl-shop/
-├── apps/
-│   ├── web/         # Frontend application (Next.js, owns its shadcn/ui setup)
-│   └── server/      # Backend API (NestJS, modular monolith; owns auth + Prisma)
-```
-
-## Available Scripts
-
-- `pnpm run dev`: Start all applications in development mode
-- `pnpm run build`: Build all applications
-- `pnpm run dev:web`: Start only the web application
-- `pnpm run dev:server`: Start only the server
-- `pnpm run check-types`: Check TypeScript types across all apps
-- `pnpm run db:push`: Push schema changes to database
-- `pnpm run db:generate`: Generate database client/types
-- `pnpm run db:migrate`: Run database migrations
-- `pnpm run db:studio`: Open database studio UI
-- `pnpm run check`: Run Oxlint and Oxfmt
-- `pnpm run docker:build`: Build the Docker Compose images
-- `pnpm run docker:up`: Build and start the Docker Compose stack
-- `pnpm run docker:logs`: Tail logs from the Docker Compose stack
-- `pnpm run docker:down`: Stop the Docker Compose stack
-
-## Auth schema
-
-`apps/server/prisma/schema/auth.prisma` is maintained by hand; the Better Auth CLI is not used. When changing auth plugins or schema options, edit that file directly, then create and apply a migration.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
