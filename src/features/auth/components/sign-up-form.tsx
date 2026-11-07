@@ -1,3 +1,6 @@
+"use client";
+
+
 import { useForm } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import z from "zod";
@@ -8,11 +11,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 
-export default function SignUpForm({
-  onSwitchToSignIn,
-}: {
-  onSwitchToSignIn: () => void;
-}) {
+export default function SignUpForm() {
   const router = useRouter();
   const { isPending } = authClient.useSession();
 
@@ -31,7 +30,7 @@ export default function SignUpForm({
         },
         {
           onSuccess: () => {
-            router.push("/dashboard");
+            router.push("/");
             toast.add({
               type: "success",
               description: "Sign up successful",
@@ -160,7 +159,7 @@ export default function SignUpForm({
       <div className="mt-4 text-center">
         <Button
           variant="link"
-          onClick={onSwitchToSignIn}
+          onClick={() => router.push("/login")}
           className="text-indigo-600 hover:text-indigo-800"
         >
           Already have an account? Sign In
